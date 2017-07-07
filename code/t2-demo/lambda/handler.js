@@ -1,10 +1,14 @@
 'use strict';
 
-module.exports.hello = (event, context, callback) => {
+const color = require('color')
+
+module.exports.color = (event, context, callback) => {
+  let ourColor = color('hsl('+ event.hue + ', 100%, ' + event.lightness +'%)')
+
   const response = {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
+      color: ourColor.rgb().array(),
       input: event,
     }),
   };
