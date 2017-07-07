@@ -22,6 +22,8 @@ board.on("ready", function() {
   const left = new five.Sensor.Digital('a7')
   const right = new five.Sensor.Digital('a4')
 
+  const button = new five.Button('b2')
+
   let lightness = 50
   let hue = 0
 
@@ -30,7 +32,6 @@ board.on("ready", function() {
     if(hue > 360){
       hue = 0
     }
-    changeLED()
   })
 
   down.on('change', () => {
@@ -38,7 +39,6 @@ board.on("ready", function() {
     if(hue < 0){
       hue = 360
     }
-    changeLED()
   })
 
   left.on('change', () => {
@@ -46,7 +46,6 @@ board.on("ready", function() {
     if(lightness < 0){
       lightness = 0
     }
-    changeLED()
   })
 
   right.on('change', () => {
@@ -54,7 +53,6 @@ board.on("ready", function() {
     if(lightness > 100){
       lightness = 100
     }
-    changeLED()
   })
 
   let changeLED = () => {
@@ -63,5 +61,5 @@ board.on("ready", function() {
     rgbLED.color(newColor)
   }
 
-
+  button.on('press', changeLED)
 })
