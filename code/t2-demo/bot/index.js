@@ -5,7 +5,7 @@ const Tessel = require('tessel-io')
 const board = new five.Board({
   io: new Tessel()
 })
-const color = require('color')
+const request = require('request')
 
 board.on("ready", function() {
   const rgbLED = new five.Led.RGB({
@@ -56,9 +56,16 @@ board.on("ready", function() {
   })
 
   let changeLED = () => {
-    console.log(hue, lightness)
-    let newColor = color('hsl(' + hue + ', 100%, ' + lightness + '%)').rgb().array()
-    rgbLED.color(newColor)
+    console.log('computing color...')
+    request.post({
+        url: 'https://ddhp947vn4.execute-api.eu-west-2.amazonaws.com/prod/lambda-dev-color',
+        form: {hue: hue, lightness: lightness}
+      },
+      function(error, res, body){
+        console.log(error, body)
+      }
+    )
+    // rgbLED.color(newColor)
   }
 
   button.on('press', changeLED)
