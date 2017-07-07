@@ -9,7 +9,6 @@ const request = require('request')
 
 board.on("ready", function() {
   const rgbLED = new five.Led.RGB({
-    isAnode: true,
     pins: {
       red: 'a5',
       green: 'a6',
@@ -57,12 +56,17 @@ board.on("ready", function() {
 
   let changeLED = () => {
     console.log('computing color...')
-    request.post({
+    request({
+        method: 'POST',
         url: 'https://ddhp947vn4.execute-api.eu-west-2.amazonaws.com/prod/lambda-dev-color',
-        form: {hue: hue, lightness: lightness}
+        json: true,
+        body: {'hue': hue, 'lightness': lightness}
       },
       function(error, res, body){
         console.log(error, body)
+        var color = JSON.parse(body.body).color
+        console.log(Math.round(color[0]) & 0xff, Math.round(color[1]) & 0xff, Math.round(color[2]) & 0xff)
+        rgbLED.color([Math.round(color[0]) & 0xff -1, Math.round(color[1]) & 0xff -1, Math.round(color[2]) & 0xff -1])
       }
     )
     // rgbLED.color(newColor)
