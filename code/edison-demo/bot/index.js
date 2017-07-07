@@ -30,6 +30,12 @@ board.on("ready", function() {
       voteQueue.push('orange')
       led.color('orange')
     }
+
+    console.log(voteQueue)
+
+    if(voteQueue.length >= 5){
+      // call lambda
+    }
   })
 
 })

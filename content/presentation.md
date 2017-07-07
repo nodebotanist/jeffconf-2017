@@ -76,10 +76,50 @@ As the JS community finds more and more ways to run JS on hardware, and Node.JS 
 ## Example 2: Powerful Microcontroller with Sync
 
 * Small linux-based microcontroller and a keypad
-* Device stores db of acceptable codes, lights up when correct code is entered
-* Stores logs of correct and incorrect attempts
-* Only needs to sync on 2 straight incorrect attempts or every 20 minutes-- send logs, get any database updates
+* Device stores votes for purple and orange, and offloads every 5 votes
+* eventual consistency across multiple vating devices
 
 ---
 
-## Why 
+## Why Serverless Here?
+
+* All I need is a task that will take in votes and send them off to be stored
+* Great for bots that have camputing power, but want to lower request overhead
+
+---
+
+## [fit] There are dangers!
+
+---
+
+## Security
+
+* Both IoT and Serverless are new-- meaning we're finding new security issues as we go.
+* IoT tends to have bigger issues-- securing hardware is a whole different rodeo
+
+---
+
+## [fit] What's next for IoT and Serverless
+
+---
+
+## AWS Greengrass
+
+* Lambda and AWS tailored for IoT purposes
+* Other providers following suit
+
+---
+
+## [fit] a better name for serverless:
+
+# [fit] Skynet.
+
+---
+
+## Thanks for listening!
+
+![inline](~/Dropbox/GIFS/carl-sagan-youre-awesome.gif)
+
+* Kassandra Perch
+* Developer Resations Engineer @ IOpipe
+* @nodebotanist, the@nodebotani.st
